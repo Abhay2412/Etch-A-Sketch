@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-a-Sketch</title>
+    <!-- Fonts -->
+
+    <!-- Stye Sheet-->    
+    <link rel="stylesheet" href="/Etch-A-Sketch/style.css" media="screen">
+  </head>
+  
+  <body class="body">
+    <div class="flex-wrapper">
+      <h1>Etch-a-Sketch</h1>
+      
+      <div class="btn-wrapper"> <!-- Button wrapper-->
+        <button id="normal" class="btn">Normal</button>
+        <button id="rainbow" class="btn">Rainbow</button>
+        
+        <button id="greyScale" class="btn">Grey Scale</button>
+        <button id="erase" class="btn">Erase</button>
+      </div>
+
+      <p id="gridSize"></p>
+
+
+      <!-- This is the div to hold all the divs created by js -->
+      <div id="grid" class="grid"> </div> 
+
+      <div>
+        <button id="clearBoard" class="btn">Clear Board</button>
+        <button id="resize" class="btn">Change the Grid Size</button>
+      </div>
+    </div> <!-- End of flex wrapper -->
+
+    <!-- Modal -->
+    <div id="modalContainer" class="modalContainer">
+      <form id="form" class="form--modal">
+        <p>How many squares? <br> Please enter between 1 - 100</p>
+        <p id="input-error" class="error"></p>
+        <label for="squares" class="label">Squares:</label>
+        <input id="squares" class="input--modal" name="squares" type="number" min="1" max="100">           
+        <button id="submitResize" class="btn">Submit</button>
+      </form>
+    </div>
+  </body>
+  <script src="/Etch-A-Sketch/script.js"></script>
+</html>
