@@ -84,12 +84,7 @@
     text-shadow: 0 0 0.4em #7d7ec9;
     font-size: 14px;
   }
-  
-  .btn--active {
-    box-shadow: 0 0 7px 3px white;
-    border-color: white;
-  }
-  
+    
   .btn:hover {
     background-color: rgb(0,0,0,.3);
   }
