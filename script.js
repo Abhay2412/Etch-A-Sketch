@@ -17,3 +17,11 @@ function clearBoard(event) {
     resetFocus();
     return;
   }
+/**
+ *  Will change the background color based on the div id
+ * Which had the mouseover 
+ * @param {*} event 
+ */
+  function changeSquareColor(event) {
+    event.target.style.backgroundColor = setColor(event.target.id);
+  }
