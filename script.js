@@ -174,3 +174,77 @@ function clearBoard(event) {
         return;
       }
       
+      /**
+       * This is called by the function which will when the rezise button is clicked. 
+       * Displays the modal box and will focus on the input box
+       * @returns 
+       */
+      function launchModal() {
+        document.getElementById('modalContainer').style.display = 'flex';
+        document.getElementById('squares').focus(); // puts the focus in the input box
+        return;
+      }
+      
+      /**
+       * This will determine the right color for the div based on 
+       * the color mode selected by the user. 
+       * Also is called by the function which actually changes the color 
+       * @param {*} gridId 
+       * @returns 
+       */
+      function setColor(gridId) {
+        //Switch statements to check for the cases 
+        switch (colorMode) {
+          case 'normal':
+            return 'black';
+            break;
+          case 'rainbow':
+            return rainbowArray[getRandomInt(0,39)];
+            break;
+          case 'erase':
+            gridColorArray[gridId] = 247;
+            return '#f7f7f7';
+            break;
+          case 'greyScale':
+            if (gridColorArray[gridId] > 0) { // 0 is as black as it gets
+              gridColorArray[gridId] -= 24.7;
+            }
+            return `rgb(${Math.round(gridColorArray[gridId])}, ${Math.round(gridColorArray[gridId])}, ${Math.round(gridColorArray[gridId])})`;
+            break;
+          default:
+            return 'crimson';
+        } 
+      }
+      
+
+      //Global variables begin 
+      const btn = document.querySelectorAll('.btn');
+      //By default 
+      let colorMode = 'normal';
+      //Array for the grid colors 
+      let gridColorArray = []; 
+      const rainbowArray = ['aqua', 'blue', 'fuchsia', 'green', 'lime', 'maroon',
+          'navy', 'olive', 'purple', 'red', 'silver', 'teal', 'yellow', 'bisque',
+          'blueviolet', 'cadetblue', 'chartreuse', 'crimson', 'cyan', 'darkcyan',
+          'darksalmon', 'darkseagreen', 'deepskyblue', 'goldenrod', 'lightcoral',
+          'lightpink', 'lightsalmon', 'lightseagreen', 'lightskyblue', 'lime',
+          'magenta', 'mediumorchid', 'mediumspringgreen', 'mistyrose',
+          'mediumslateblue', 'orangered', 'orchid', 'palegoldenrod', 'palegreen',
+           'paleturquoise'];
+           //Inital length of the square board 
+      const sideLength = 10; 
+      //Event listeners 
+      btn.forEach((button) => {
+        button.addEventListener('click', clickActions);
+      });
+      //Will close the modal if the user clicks anywhere outside of the form
+      document.onclick = function(event) {
+        if (event.target.id === 'modalContainer') {
+          document.getElementById('modalContainer').style.display = 'none';
+        }
+      }
+      
+      document.addEventListener('keydown', keyEvent);
+      
+      //Actually make the board with inital side length 
+      makeBoard(sideLength);
