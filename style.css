@@ -48,28 +48,6 @@
     }
   }
   
-  .item {
-    border-style: none;
-    background-color: #f7f7f7;
-    text-align: center;
-    animation-name: fadeline;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-  }
-  
-  @keyframes fadeline {
-    from {
-      border-style: solid;
-      border-color: black;
-      border-width: 1px;
-    }
-  
-    to {
-      border-style: solid;
-      border-color: #f7f7f7;
-      border-width: 1px;
-    }
-  }
   
   .btn {
     width: 85px;
@@ -89,10 +67,6 @@
     background-color: rgb(0,0,0,.3);
   }
   
-  .btn:focus {
-    box-shadow: 0 0 7px 3px white;
-    border-color: white;
-  }
   
   /**** Modal ****/
   .modalContainer {
@@ -107,4 +81,27 @@
     background-color: rgba(0,0,0,.6);
   }
     
- 
+  .form--modal {
+    position: absolute;
+    z-index: 1;
+    top: 20%;
+    width: 200px;
+    padding: 10px;
+    border-style: solid;
+    border-color: #009EC3;
+    border-width: 5px;
+    background-color: #404040; /* #404040 dark grey */
+    color: #05d5fc;
+    text-shadow: none;
+    text-align: center;
+  }   
+  
+  .input--modal {
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+  }
