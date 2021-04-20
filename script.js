@@ -49,13 +49,11 @@ function clearBoard(event) {
  * @returns 
  */
   function makeBoard(num) {    
-    //   gridColorArray = []; // clears all array elements for a fresh start
+      gridColorArray = []; // clears all array elements for a fresh start
       document.getElementById('grid').style.gridTemplateRows = `repeat(${num}, 1fr)`;
       document.getElementById('grid').style.gridTemplateColumns = `repeat(${num}, 1fr)`;
       for (let i = 0; i < num * num; i++) {
         const div = document.createElement('div');
-        /* let textNode = document.createTextNode(i);
-        div.appendChild(textNode); */
         div.setAttribute('id', `${i}`);
         div.classList.add('item');
         document.getElementById('grid').appendChild(div);
@@ -67,3 +65,112 @@ function clearBoard(event) {
       addGridHoverListener(); 
       return;
     }
+
+    /**
+     * This will clear the click actions based on the id which
+     * was clicked and then sets the colorMode 
+     * Also adds and removes the visual color mode
+     * to the buttons
+     * @param {*} event 
+     * @returns 
+     */
+    function clickActions(event) {
+        //Checking for the ids by using and if statement and switch statments 
+        if (this.id === 'clearBoard' || this.id === 'resize' || this.id === 'submitResize') {
+          switch(this.id) {
+            case 'clearBoard':
+              clearBoard(event);
+              break;
+            case 'resize':
+              launchModal();
+              break;
+            case 'submitResize':
+              getResizeInput(event);
+              break;        
+          }
+          return;
+        } else {
+            document.getElementById(colorMode).classList.remove('btn--active'); 
+            switch (this.id) {
+              case 'normal':
+                colorMode = 'normal';
+                break;
+              case 'rainbow':
+                colorMode = 'rainbow';
+                break;
+              case 'greyScale':
+                colorMode = 'greyScale';
+                break;
+              case 'erase':
+                colorMode = 'erase';
+                break;
+              default:
+                console.log('No color mode identified');
+                colorMode = 'normal';
+                break;
+            }
+            document.getElementById(colorMode).classList.add('btn--active'); 
+            return;
+          }
+      }
+      
+      /**
+       * Random integer creater 
+       * @param {} min Minumum value 
+       * @param {*} max Maximum value 
+       * @returns 
+       */
+      function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max); 
+        return Math.floor(Math.random() * (max - min) + min); 
+      }
+      
+      /**
+       * Is called from the clickActions method after the submit button for
+       * resizing is clicked. Will get the user input for how many sqaures they want
+       * between 1-100 and will make sure it works only go into the 
+       * makeBoard function if its valid 
+       * 
+       * @param {*} event 
+       * @returns 
+       */
+      function getResizeInput(event) {
+        //This is basically yruing to prevent the form from to submit to a server
+        event.preventDefault(); 
+        //Will clear the error message
+        document.getElementById('input-error').textContent = '';
+        //Parses the int to make sure it is a number 
+        const numOfSquares = parseInt(document.getElementById('squares').value);
+        
+        //Will check for the numOfSquares if they are valid or not 
+        if (numOfSquares < 1 || numOfSquares > 100) {
+          document.getElementById('input-error').textContent = 'Please pick a number betwen 1 and 100';
+          return; 
+          //Will break out of this function if there is no changes made 
+        }
+      
+        //Will hide the modal again
+        document.getElementById('modalContainer').style.display = 'none';
+        //Will clear the input box when the user uses it next time
+        document.getElementById('squares').value = ''; 
+        //This will remove all the pervious divs which were created in the drawing area
+        document.querySelectorAll('.item').forEach(e => e.remove()); 
+        
+        makeBoard(numOfSquares);
+        return;
+      }
+
+      /**
+       * This will take the action when the escape key is pressed
+       * Notice whill only work then modal is opened 
+       * @param {*} event 
+       * @returns 
+       */
+      function keyEvent(event) {
+        if (event.code == 'Escape') {
+          document.getElementById('modalContainer').style.display = 'none';
+        }  
+        return;
+      }
+      
