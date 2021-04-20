@@ -25,3 +25,45 @@ function clearBoard(event) {
   function changeSquareColor(event) {
     event.target.style.backgroundColor = setColor(event.target.id);
   }
+  /**
+   * This will add a mouseover listener for the each div
+   * Which will be created from our makeBoard function
+   * When the mouse over is detected will call the 
+   * Change square color function 
+   * @returns 
+   */
+  function addGridHoverListener() {
+    const divs = document.querySelectorAll('.item');
+    divs.forEach((div) => {
+      div.addEventListener('mouseover', changeSquareColor);
+    });
+    return;
+  }
+
+/**
+ * Function which create the drawing board by using the divs
+ * And then adding them again to the DOM 
+ * An id will be associated with the div
+ * An array which will keep a track of the colors 
+ * @param {*} num for the number of squares in the drawing area as desired by the user 
+ * @returns 
+ */
+  function makeBoard(num) {    
+    //   gridColorArray = []; // clears all array elements for a fresh start
+      document.getElementById('grid').style.gridTemplateRows = `repeat(${num}, 1fr)`;
+      document.getElementById('grid').style.gridTemplateColumns = `repeat(${num}, 1fr)`;
+      for (let i = 0; i < num * num; i++) {
+        const div = document.createElement('div');
+        /* let textNode = document.createTextNode(i);
+        div.appendChild(textNode); */
+        div.setAttribute('id', `${i}`);
+        div.classList.add('item');
+        document.getElementById('grid').appendChild(div);
+        gridColorArray.push(246); //rgb(246, 246, 246) is the background color for .item
+      }
+      showGridSize(num); 
+      document.getElementById(colorMode).classList.add('btn--active');
+      resetFocus(); 
+      addGridHoverListener(); 
+      return;
+    }
