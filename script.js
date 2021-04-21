@@ -215,8 +215,25 @@ function clearBoard(event) {
             return 'crimson';
         } 
       }
-      
-
+      /**
+       * Will reset the focus which enables the show color mode after clear 
+       * Or either resizing it
+       * @returns 
+       */
+      function resetFocus() {
+        document.getElementById(colorMode).focus();
+        return;
+      }
+      /**
+       * Helps in displaying the grid size on the page which is called makeBoard
+       * Whenever the board is made or resized. 
+       * @param {*} size 
+       * @returns 
+       */
+      function showGridSize(size) {
+        document.getElementById('gridSize').textContent = `Grid size: ${size} x ${size}`;
+        return;
+      }
       //Global variables begin 
       const btn = document.querySelectorAll('.btn');
       //By default 
